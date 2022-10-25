@@ -49,32 +49,36 @@ function playRound(playerSelection, computerSelection) {
 
 
 
-function resetGame(){
+function resetGame() {
     playerScore = 0;
     computerScore = 0;
     round = 0;
     updateDisplay();
-    resultDisplay.textContent="Choose one:";
-    gameOverContainer.style.display='none';
+    resultDisplay.textContent = "Choose one:";
+    gameOverContainer.style.display = 'none';
+    btns.forEach(btn => btn.disabled = false);
+
 }
 
-function gameOver(playerScore, computerScore){
+function gameOver(playerScore, computerScore) {
     if (playerScore > computerScore) {
-        gameOverMsg.textContent="You won!";
-    }else {
-        gameOverMsg.textContent="You lost!";
+        gameOverMsg.textContent = "You won!";
+    } else {
+        gameOverMsg.textContent = "You lost!";
     }
 
-    gameOverContainer.style.display='block';
+    gameOverContainer.style.display = 'block';
 
     resetGameBtn.addEventListener('click', () => {
         resetGame();
     });
-    
-    
+
+    btns.forEach(btn => btn.disabled = true);
+
+
 }
 
-function updateDisplay(){
+function updateDisplay() {
     roundDisplay.textContent = "Round: " + round;
     playerScoreDisplay.textContent = "Player Score: " + playerScore;
     computerScoreDisplay.textContent = "Computer Score: " + computerScore;
@@ -95,8 +99,8 @@ function game(playerSelection) {
     }
     updateDisplay();
 
-    if (playerScore == 5 || computerScore == 5){
-        gameOver(playerScore,computerScore);
+    if (playerScore == 5 || computerScore == 5) {
+        gameOver(playerScore, computerScore);
     }
 }
 
