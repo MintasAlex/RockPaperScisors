@@ -1,8 +1,15 @@
-const btns = document.querySelectorAll('button');
+const choiceMenu = document.querySelector('.choice-menu');
+const btns = choiceMenu.querySelectorAll('button');
 const resultDisplay = document.querySelector(".result");
 const playerScoreDisplay = document.querySelector("#playerScore");
 const computerScoreDisplay = document.querySelector("#computerScore");
 const roundDisplay = document.querySelector("#round");
+const gameOverContainer = document.querySelector("#gameOver");
+const gameOverMsg = gameOverContainer.querySelector('h2');
+const resetGameBtn = gameOverContainer.querySelector('button');
+
+
+
 let playerScore = computerScore = round = 0;
 
 function getComputerChoice() {
@@ -40,9 +47,7 @@ function playRound(playerSelection, computerSelection) {
     } else return ("You lose! Rock beats Scisors!");
 }
 
-const gameContainer = document.querySelector('#game');
-const gameOverMsg = document.createElement('h2');
-const resetGameBtn = document.createElement('button');
+
 
 function resetGame(){
     playerScore = 0;
@@ -50,8 +55,7 @@ function resetGame(){
     round = 0;
     updateDisplay();
     resultDisplay.textContent="Choose one:";
-    gameContainer.removeChild(gameOverMsg);
-    gameContainer.removeChild(resetGameBtn);
+    gameOverContainer.style.display='none';
 }
 
 function gameOver(playerScore, computerScore){
@@ -61,14 +65,12 @@ function gameOver(playerScore, computerScore){
         gameOverMsg.textContent="You lost!";
     }
 
-    resetGameBtn.textContent="Play again!";
+    gameOverContainer.style.display='block';
+
     resetGameBtn.addEventListener('click', () => {
         resetGame();
     });
     
-
-    gameContainer.appendChild(gameOverMsg);
-    gameContainer.appendChild(resetGameBtn);
     
 }
 
